@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefault", "infra\Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceManager.Client", "src\PersonalFinanceManager.Client\PersonalFinanceManager.Client.csproj", "{65FEE146-7836-4E12-9229-ABEFA172659A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceManger.API", "src\PersonalFinanceManger.API\PersonalFinanceManger.API.csproj", "{D3A779DA-820B-D64F-9031-5613D1A6721E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceManager.API", "src\PersonalFinanceManager.API\PersonalFinanceManager.API.csproj", "{D3A779DA-820B-D64F-9031-5613D1A6721E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceManager.Test", "test\PersonalFinanceManager.Test\PersonalFinanceManager.Test.csproj", "{18442B73-49C4-43CF-A0F2-551DAA529DAE}"
 EndProject

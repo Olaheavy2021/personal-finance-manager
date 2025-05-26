@@ -4,6 +4,18 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <Version>0.0.0</Version>
+	<Description>REST API Client library for Personal Finance Manager</Description>
+	<Title>Personal Finance Manager Client</Title>
+	<OutputType>Library</OutputType>
+	<EnableDefaultContentItems>false</EnableDefaultContentItems>
+	<IsPackable>true</IsPackable>
+	<NoWarn>CS8600;CS8602</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PersonalFinanceManager.API\PersonalFinanceManager.API.csproj" ReferenceOutputAssembly="false" />
+	  <Compile Include="PFMv1Client.g.cs" Exclude="@(Compile)"/>
+  </ItemGroup>
 
 </Project>

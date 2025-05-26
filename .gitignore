@@ -425,3 +425,4 @@ yarn-error.log*
 *.feature.cs
 /src/**/*.g.cs
 site/**
+/src/PersonalFinanceManager.Client/PFMv1Client.g.cs

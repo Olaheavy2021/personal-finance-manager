@@ -1,6 +1,6 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var pfmApi = builder.AddProject<Projects.PersonalFinanceManger_API>("personalfinancemanger-api")
+var pfmApi = builder.AddProject<Projects.PersonalFinanceManager_API>("personalfinancemanager-api")
     .WithExternalHttpEndpoints();
 
 builder.AddNpmApp("react", "../../frontend/pfm-app")
