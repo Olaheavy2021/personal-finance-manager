@@ -13,8 +13,10 @@ jobs:
     name : Check PR title
     runs-on: ubuntu-latest 
     steps:
-      - uses: thehanimo/pr-title-checker@v1.4.3
+      - name: Check PR Title
+        uses: deepakputhraya/action-pr-title@master
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          pass_on_octokit_error: false
-          configuration_path: .github/pr-title-checker-config.json #(optional. defaults to .github/pr-title-checker-config.json)
+            allowed_prefixes: 'Patch:,Feature:,Breaking:' # title should start with the given prefix
+            prefix_case_sensitive: true # title prefix are case sensitive
+            min_length: 5 # Min length of the title
+            github_token: ${{ github.token }}
