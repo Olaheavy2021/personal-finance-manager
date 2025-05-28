@@ -30,10 +30,10 @@ jobs:
 
     steps:
       - name: Checkout the Source Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       
@@ -60,7 +60,7 @@ jobs:
           dotnet reportgenerator -reports:${{ github.workspace }}/Tests/Coverage -targetdir:"${{ github.workspace }}/Tests/coveragereport" -reporttypes:Html
           
       - name: Upload code coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
             name: coveragereport
             path: ${{ github.workspace }}/Tests/coveragereport
