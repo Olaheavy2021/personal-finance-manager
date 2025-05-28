@@ -66,10 +66,11 @@ jobs:
         run: |
           echo "Merging Coverage Reports"
           reportgenerator \
-            "-reports:${{ github.workspace }}/Tests/Coverage/**/*.cobertura.xml" \
+            "-reports:${{ github.workspace }}/Tests/Coverage/*.cobertura.xml" \
             "-targetdir:${{ steps.variables.outputs.output-folder }}" \
             -reporttypes:Html;MarkdownSummaryGithub;Cobertura \
             -filefilters:-*.g.cs
+
           ls -la "${{ steps.variables.outputs.output-folder }}"
 
       # 3) Append the Markdown summary to the GitHub Actions job summary
