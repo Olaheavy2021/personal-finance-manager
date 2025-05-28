@@ -29,7 +29,6 @@ public class WeatherForecastStepDefinitions(IPFMv1Client pfmClient, ScenarioCont
         Assert.That(res, Is.Not.Empty, "Weather forecasts list should not be empty.");
         Assert.That(res, Is.InstanceOf<List<WeatherForecast>>(), "Response should be a list of WeatherForecast objects.");
         Assert.That(res.Count, Is.GreaterThan(0), "Weather forecasts list should contain at least one item.");
-       // 
     }
 
     [Then("each weather forecast should have a date, temperature, and summary")]
@@ -38,7 +37,11 @@ public class WeatherForecastStepDefinitions(IPFMv1Client pfmClient, ScenarioCont
         var res = scenarioContext.Get<List<WeatherForecast>>("WeatherForecasts");
 
         Assert.That(res.All(wf => wf.Date != default), "All weather forecasts should have a valid date.");
-        Assert.That(res.All(wf => wf.TemperatureC != default), "All weather forecasts should have a temperature in Celsius.");
+        Assert.That(
+   res.Select(wf => wf.TemperatureC),
+   Is.All.GreaterThanOrEqualTo(-273),
+   "TemperatureC should be ? absolute zero"
+ );
         Assert.That(res.All(wf => !string.IsNullOrEmpty(wf.Summary)), "All weather forecasts should have a summary.");
 
     }
