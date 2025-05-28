@@ -63,7 +63,7 @@ jobs:
 
       - name: Generate coverage report
         run: |
-          dotnet reportgenerator \
+          reportgenerator \
             -reports:${{ github.workspace }}/Tests/Coverage \
             -targetdir:${{ github.workspace }}/Tests/coveragereport \
             -reporttypes:Html
