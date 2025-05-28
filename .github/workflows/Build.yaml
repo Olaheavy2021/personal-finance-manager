@@ -2,31 +2,24 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-     - main
+    branches: [ main ]
 
 env:
   DOTNET_VERSION: '9.0.x'
 
 concurrency:
-  # Use github.run_id on main branch
-  # Use github.event.pull_request.number on pull requests, so it's unique per pull request
-  # Use github.ref on other branches, so it's unique per branch
   group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   build-and-test:
-
-    # When the workflow runs, this is the name that is logged
-    name: build-and-test-${{matrix.os}}
+    name: build-and-test-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ ubuntu-latest ]
 
     steps:
       - name: Checkout the Source Code
@@ -44,10 +37,10 @@ jobs:
         run: |
           dotnet tool install --global dotnet-reportgenerator-globaltool
           dotnet tool install --global dotnet-coverage
-      
+
       - name: Install dependencies
         run: dotnet restore
-      
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
@@ -61,15 +54,48 @@ jobs:
             --output-format cobertura \
             --settings CodeCoverage.runsettings
 
-      - name: Generate coverage report
+      # 1) capture where our merged report will live
+      - name: Set output-folder
+        id: variables
         run: |
-          reportgenerator \
-            -reports:${{ github.workspace }}/Tests/Coverage \
-            -targetdir:${{ github.workspace }}/Tests/coveragereport \
-            -reporttypes:Html
+          OUTPUT="${{ github.workspace }}/Tests/coveragereport"
+          echo "output-folder=${OUTPUT}" >> $GITHUB_OUTPUT
 
+      # 2) merge all cobertura.xmls, generate HTML + Markdown summary
+      - name: Merge Coverage Reports
+        run: |
+          echo "Merging Coverage Reports"
+          reportgenerator \
+            "-reports:${{ github.workspace }}/Tests/Coverage/**/*.cobertura.xml" \
+            "-targetdir:${{ steps.variables.outputs.output-folder }}" \
+            -reporttypes:Html;MarkdownSummaryGithub;Cobertura \
+            -filefilters:-*.g.cs
+          ls -la "${{ steps.variables.outputs.output-folder }}"
+
+      # 3) Append the Markdown summary to the GitHub Actions job summary
+      - name: Add Test Summary to Workflow
+        if: always()
+        shell: bash
+        run: |
+          SUMMARY="${{ steps.variables.outputs.output-folder }}/SummaryGithub.md"
+          if [ -f "$SUMMARY" ]; then
+            cat "$SUMMARY" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No SummaryGithub.md found"
+          fi
+
+      # 4) Post (or update) a sticky comment on the PR with the same summary
+      - name: Add Test Summary to PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: Test Summary
+          recreate: true
+          path: ${{ steps.variables.outputs.output-folder }}/SummaryGithub.md
+
+      # 5) Still upload the full HTML report as an artifact
       - name: Upload code coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coveragereport
-          path: ${{ github.workspace }}/Tests/coveragereport
+          path: ${{ steps.variables.outputs.output-folder }}
