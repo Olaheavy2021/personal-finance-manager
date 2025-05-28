@@ -46,6 +46,6 @@
 	</ItemGroup>
 
 	<Target Name="NSwag" AfterTargets="Build" Condition=" '$(NoSwagGen)' == ''">
-		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run nswag_v1.json /variables:Configuration=$(Configuration)" />
+		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net90) run nswag_v1.json /variables:Configuration=$(Configuration)" />
 	</Target>
 </Project>
