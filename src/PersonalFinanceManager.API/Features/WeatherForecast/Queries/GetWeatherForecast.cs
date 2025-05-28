@@ -16,7 +16,7 @@ public class GetWeatherForecasts : ICarterModule
             .WithTags(nameof(WeatherForecast))
             .WithDescription("Get weather forecasts")
             .WithSummary("Get weather forecasts")
-            .Produces<WeatherForecastModel>();
+            .Produces<List<WeatherForecastModel>>();
     }
 
     public record GetWeatherForecastsQuery : IRequest<IResult>;

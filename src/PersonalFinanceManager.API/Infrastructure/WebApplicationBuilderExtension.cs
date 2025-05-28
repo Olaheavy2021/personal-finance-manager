@@ -11,6 +11,7 @@ public static class WebApplicationBuilderExtension
     public static ApiVersion[] Versions { get; } = [V1];
     public static WebApplicationBuilder AddMyAppDefaults(this WebApplicationBuilder builder)
     {
+        builder.Services.AddHealthChecks();
         builder.AddServiceDefaults();
 
         builder.AddSerilogLogging();

@@ -19,6 +19,8 @@ public static class WebApplicationExtensions
         app.MapDefaultEndpoints()
            .UseHttpsRedirection();
 
+        app.MapHealthChecks("/healthz/startup");
+
         return app;
     }
 }
