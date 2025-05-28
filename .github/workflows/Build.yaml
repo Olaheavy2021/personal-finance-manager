@@ -36,31 +36,40 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Add .NET global tools to PATH
+        run: echo "${{ env.HOME }}/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Install coverage tools
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          dotnet tool install --global dotnet-coverage
       
       - name: Install dependencies
         run: dotnet restore
       
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      
+
       - name: Test
         run: dotnet test --no-restore --verbosity normal
-        
-      - name: Install tools for Coverage Report
+
+      - name: Run tests with coverage
         run: |
-          dotnet new tool-manifest
-          dotnet tool install dotnet-reportgenerator-globaltool
-          dotnet tool install dotnet-coverage
-          
-      - name: Run the unit tests with code coverage
-        run: dotnet coverage collect dotnet test --output ${{ github.workspace }}/Tests/Coverage --output-format cobertura --settings CodeCoverage.runsettings
-          
-      - name: Generate Report
+          dotnet coverage collect dotnet test \
+            --output ${{ github.workspace }}/Tests/Coverage \
+            --output-format cobertura \
+            --settings CodeCoverage.runsettings
+
+      - name: Generate coverage report
         run: |
-          dotnet reportgenerator -reports:${{ github.workspace }}/Tests/Coverage -targetdir:"${{ github.workspace }}/Tests/coveragereport" -reporttypes:Html
-          
+          dotnet reportgenerator \
+            -reports:${{ github.workspace }}/Tests/Coverage \
+            -targetdir:${{ github.workspace }}/Tests/coveragereport \
+            -reporttypes:Html
+
       - name: Upload code coverage report
         uses: actions/upload-artifact@v4
         with:
-            name: coveragereport
-            path: ${{ github.workspace }}/Tests/coveragereport
+          name: coveragereport
+          path: ${{ github.workspace }}/Tests/coveragereport
