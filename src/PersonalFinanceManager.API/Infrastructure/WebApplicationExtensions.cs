@@ -10,16 +10,21 @@ public static class WebApplicationExtensions
         app.NewVersionedApi()
             .MapGroup("/api/v{version:apiVersion}")
             .MapCarter();
+
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.MapSwagger();
         }
 
-        app.MapDefaultEndpoints()
-           .UseHttpsRedirection();
+        app.MapDefaultEndpoints();
+          
 
         app.MapHealthChecks("/healthz/startup");
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.UseHttpsRedirection();
 
         return app;
     }

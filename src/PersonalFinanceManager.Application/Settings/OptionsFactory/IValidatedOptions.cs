@@ -1,4 +1,6 @@
-﻿namespace PersonalFinanceManager.API.Infrastructure.Settings;
+﻿using FluentValidation;
+
+namespace PersonalFinanceManager.Application.Settings.OptionsFactory;
 
 public interface IValidatedOptions<in TOptions> where TOptions : new()
 {

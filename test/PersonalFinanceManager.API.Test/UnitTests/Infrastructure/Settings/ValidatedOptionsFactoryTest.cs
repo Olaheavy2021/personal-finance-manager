@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
-using PersonalFinanceManager.API.Infrastructure.Settings;
+using PersonalFinanceManager.Application.Settings.OptionsFactory;
 
 namespace PersonalFinanceManager.API.Test.UnitTests.Infrastructure.Settings;
 

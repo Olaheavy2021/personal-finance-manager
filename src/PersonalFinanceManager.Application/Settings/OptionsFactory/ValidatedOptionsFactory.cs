@@ -1,4 +1,8 @@
-﻿namespace PersonalFinanceManager.API.Infrastructure.Settings;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+namespace PersonalFinanceManager.Application.Settings.OptionsFactory;
 
 public static class ValidatedOptionsFactory
 {

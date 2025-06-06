@@ -1,4 +1,10 @@
-﻿namespace PersonalFinanceManager.API.Infrastructure.OpenApi;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
+using NSwag;
+using NSwag.Generation.Processors.Security;
+using System.Xml.Linq;
+
+namespace PersonalFinanceManager.API.Infrastructure.OpenApi;
 
 public static class ConfigureSwagger
 {
@@ -31,6 +37,15 @@ public static class ConfigureSwagger
                 {
                     additional.ConfigureOpenApiSettings(version, settings);
                 }
+
+                settings.AddSecurity("Bearer", new NSwag.OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.Http,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    BearerFormat = "JWT",
+                    Description = "Type into the textbox: {your JWT token}."
+                });
+                settings.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
             });
         }
 

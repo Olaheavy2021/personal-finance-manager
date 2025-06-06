@@ -4,7 +4,8 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+	  <UserSecretsId>82aa4a08-2040-472e-9e18-6daa4902a588</UserSecretsId>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
@@ -13,7 +14,7 @@
 		<PackageReference Include="Carter" Version="9.0.0" />
 		<PackageReference Include="FluentValidation" Version="12.0.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2025.1.0-eap1" />
 		<PackageReference Include="MediatR" Version="12.5.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="NJsonSchema" Version="11.3.2" />
@@ -24,20 +25,30 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Riok.Mapperly" Version="4.2.1" />
-		<PackageReference Include="Serilog" Version="4.3.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
-		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
-		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
-		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-		<PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.12.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.12.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.12.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.12.0" />
+		
+		
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\infra\ServiceDefault\ServiceDefault.csproj" />
+		<ProjectReference Include="..\PersonalFinanceManager.Application\PersonalFinanceManager.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Features\Auth\Models\" />
 	  <Folder Include="wwwroot\api\" />
 	</ItemGroup>
 

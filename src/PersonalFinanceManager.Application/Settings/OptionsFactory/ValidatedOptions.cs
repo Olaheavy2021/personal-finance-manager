@@ -1,4 +1,6 @@
-﻿namespace PersonalFinanceManager.API.Infrastructure.Settings;
+﻿using Microsoft.Extensions.Options;
+
+namespace PersonalFinanceManager.Application.Settings.OptionsFactory;
 
 public class ValidatedOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class, IValidatedOptions<TOptions>, new()
 {

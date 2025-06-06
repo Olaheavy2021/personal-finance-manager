@@ -1,6 +1,4 @@
-﻿using PersonalFinanceManager.API.Infrastructure.Validation;
-
-namespace PersonalFinanceManager.API.Infrastructure.Validation;
+﻿namespace PersonalFinanceManager.API.Infrastructure.Validation;
 
 public static class ConfigureValidation
 {

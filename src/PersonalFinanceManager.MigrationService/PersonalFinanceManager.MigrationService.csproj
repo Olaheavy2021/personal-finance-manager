@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-PersonalFinanceManager.MigrationService-0554c8e7-718b-4658-b754-f0f5648454c2</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\infra\ServiceDefault\ServiceDefault.csproj" />
+    <ProjectReference Include="..\PersonalFinanceManager.Application\PersonalFinanceManager.Application.csproj" />
+  </ItemGroup>
+</Project>

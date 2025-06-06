@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
-using PersonalFinanceManager.API.Infrastructure.Settings;
+using PersonalFinanceManager.Application.Settings.OptionsFactory;
 
 namespace PersonalFinanceManager.API.Test.UnitTests.Infrastructure.Settings;
 
